@@ -5,17 +5,22 @@ JavaEE入门DEMO
 ## 代码示例
 **DAO层(Dao)**
 ```java
-    ResultSet rs = s.executeQuery(sql);
+    public List<Hero> list() {
+        List<Hero> heros = new ArrayList<Hero>();
+        ......
+        ResultSet rs = s.executeQuery(sql);
   
-         if (rs.next()) {
-             hero = new Hero();
+        while (rs.next()) {
+             Hero hero = new Hero();
+             int id = rs.getInt(1);
              String name = rs.getString(2);
-             float hp = rs.getFloat("hp");
-             int damage = rs.getInt(4);
-             hero.name = name;
-             hero.hp = hp;
-             hero.damage = damage;
              hero.id = id;
+             hero.name = name;
+             
+             heros.add(hero);
+        }
+        ......
+        return heros;    
      }
 ```
 **Model层(Bean)**
